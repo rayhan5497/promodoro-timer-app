@@ -10,7 +10,6 @@ form.querySelector('.remove-form').addEventListener('click', () => {
   textarea.value = '';
 });
 
-// if (confirmation) {
 //Show - Hide Form
 task.querySelector('.add-task').addEventListener('click', () => {
   if (isCountdownRunning) {
@@ -61,4 +60,3 @@ textarea.addEventListener('focus', () => {
   textarea.style.boxShadow = '0 0 3px black';
   input.style.boxShadow = '';
 });
-// }
