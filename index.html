@@ -11,7 +11,10 @@
         rel="stylesheet">
     <title>Promodoro Timer</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/form.css">
+    <link rel="stylesheet" href="assets/custom-style.css">
     <script src="script/script.js" defer></script>
+    <script src="script/task.js" defer></script>
 
 </head>
 
@@ -45,12 +48,25 @@
         <section id="task">
             <div class="current-task">
                 <div class="running-task-heading">Running Task:</div>
-                <div class="running-task">No task is running currently!</div>
+                <details>
+                    <summary class="running-task">No task is running currently!</summary>
+                    <hr color="gray">
+                    <div class="running-task-details"> No Details!
+                    </div>
+                </details>
+
             </div>
             <div class="add-task">
                 <span class="add-task-icon"></span>
                 <p>Add Task</p>
             </div>
+        </section>
+        
+        <section class="form">
+            <div class="remove-form"></div>
+            <input type="text" name="title" id="title" placeholder="Task...">
+            <textarea name="description" id="description" placeholder="Task Details..."></textarea>
+            <button type="submit">Add</button>
         </section>
     </main>
 
