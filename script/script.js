@@ -11,7 +11,19 @@ let countdownInterval,
   promodoroTime,
   shortBreakTime,
   longBreakTime,
-  isCountdownRunning;
+  confirmation;
+let isCountdownRunning = false;
+
+function resetCountdown() {
+  isCountdownRunning = false;
+  timeLimit.querySelectorAll('button').forEach((button) => {
+    button.style.backgroundColor = 'transparent';
+    removeGlowingText();
+  });
+    clearInterval(countdownInterval);
+    promodoro();
+    timeCountdown.textContent = formatTime(promodoroTime);
+}
 
 const timeLimit = document.querySelector('.time-limit');
 document.addEventListener('click', (event) => {
@@ -20,34 +32,15 @@ document.addEventListener('click', (event) => {
     event.target.classList.contains('short-break') ||
     event.target.classList.contains('long-break')
   ) {
-    let confirmation;
     if (isCountdownRunning) {
       confirmation = confirm('If You Click OK > Countdown Will Be Reset!');
     }
 
-    if (confirmation) {
+    if (confirmation || !isCountdownRunning) {
       isCountdownRunning = false;
       timeLimit.querySelectorAll('button').forEach((button) => {
         button.style.backgroundColor = 'transparent';
-        timeCountdown.style.textShadow = 'none';
-      });
-      if (event.target.classList.contains('promodoro')) {
-        clearInterval(countdownInterval);
-        promodoro();
-        timeCountdown.textContent = formatTime(promodoroTime);
-      } else if (event.target.classList.contains('short-break')) {
-        clearInterval(countdownInterval);
-        shortBreak();
-        timeCountdown.textContent = formatTime(shortBreakTime);
-      } else if (event.target.classList.contains('long-break')) {
-        clearInterval(countdownInterval);
-        longBreak();
-        timeCountdown.textContent = formatTime(longBreakTime);
-      }
-    } else if (!isCountdownRunning) {
-      timeLimit.querySelectorAll('button').forEach((button) => {
-        button.style.backgroundColor = 'transparent';
-        timeCountdown.style.textShadow = 'none';
+        removeGlowingText();
       });
       if (event.target.classList.contains('promodoro')) {
         clearInterval(countdownInterval);
@@ -115,7 +108,7 @@ function longBreak() {
 
 const startCountdownButton = document.querySelector('.start-countdown-button');
 startCountdownButton.addEventListener('click', () => {
-  timeCountdown.style.textShadow = '0 0 10px #fbff0098';
+  glowingText();
   const buttonsOfTimeLimit = document
     .querySelector('.time-limit')
     .querySelectorAll('button')
@@ -138,3 +131,19 @@ startCountdownButton.addEventListener('click', () => {
       }
     });
 });
+
+function glowingText() {
+  timeCountdown.classList.add('glowing-text');
+  const details = document.querySelector('details');
+  details.querySelector('summary').classList.add('glowing-text');
+  details.querySelector('.running-task-details').classList.add('glowing-text');
+}
+
+function removeGlowingText() {
+  timeCountdown.classList.remove('glowing-text');
+  const details = document.querySelector('details');
+  details.querySelector('summary').classList.remove('glowing-text');
+  details
+    .querySelector('.running-task-details')
+    .classList.remove('glowing-text');
+}

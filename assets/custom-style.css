@@ -2,3 +2,8 @@
     box-shadow: #ff7f7f 0px 0px 20px;
     background-color: #ffe0e0;
 }
+
+.glowing-text {
+    opacity: 1;
+    text-shadow: 0 0 10px #fbff00a8;
+}

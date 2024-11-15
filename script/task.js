@@ -6,17 +6,25 @@ const textarea = form.querySelector('textarea');
 //remove form
 form.querySelector('.remove-form').addEventListener('click', () => {
   form.style.display = 'none';
-  form.querySelector('input').value = '';
-  form.querySelector('textarea').value = '';
+  input.value = '';
+  textarea.value = '';
 });
 
-//Show -Hide Form
+// if (confirmation) {
+//Show - Hide Form
 task.querySelector('.add-task').addEventListener('click', () => {
-  console.log(form);
-  if (form.style.display === 'none' || form.style.display === '') {
-    form.style.display = 'flex';
-  } else {
-    form.style.display = 'none';
+  if (isCountdownRunning) {
+    confirmation = confirm('If You Click OK > Countdown Will Be Reset!');
+  }
+  if (confirmation || !isCountdownRunning) {
+    if (isCountdownRunning) {
+        resetCountdown();
+    }
+      if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'flex';
+      } else {
+        form.style.display = 'none';
+      }
   }
 });
 
@@ -28,11 +36,13 @@ form.querySelector('button').addEventListener('click', () => {
   if (input.value !== '') {
     runningTask.textContent = input.value;
     if (textarea.value !== '') {
-        runningTaskDetails.textContent = textarea.value;
+      runningTaskDetails.textContent = textarea.value;
     } else {
-        runningTaskDetails.textContent = 'No Details!';
+      runningTaskDetails.textContent = 'No Details!';
     }
     form.style.display = 'none';
+    input.value = '';
+    textarea.value = '';
   } else {
     input.classList.add('empty-input');
     input.style.boxShadow = '';
@@ -40,7 +50,6 @@ form.querySelector('button').addEventListener('click', () => {
 });
 
 input.addEventListener('focus', () => {
-  console.log('wrong');
   input.style.boxShadow = '0 0 3px black';
   textarea.style.boxShadow = '';
   if (input.classList.contains('empty-input')) {
@@ -52,5 +61,4 @@ textarea.addEventListener('focus', () => {
   textarea.style.boxShadow = '0 0 3px black';
   input.style.boxShadow = '';
 });
-
-
+// }
