@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   timeCountdown.textContent = formatTime(promodoroTime);
 });
 
-
 //Set Timer
 let countdownInterval,
   timeCountdown,
@@ -22,12 +21,10 @@ document.addEventListener('click', (event) => {
     event.target.classList.contains('long-break')
   ) {
     let confirmation;
-    console.log(isCountdownRunning);
     if (isCountdownRunning) {
       confirmation = confirm('If You Click OK > Countdown Will Be Reset!');
     }
 
-    console.log(confirmation);
     if (confirmation) {
       isCountdownRunning = false;
       timeLimit.querySelectorAll('button').forEach((button) => {
@@ -47,14 +44,11 @@ document.addEventListener('click', (event) => {
         longBreak();
         timeCountdown.textContent = formatTime(longBreakTime);
       }
-    }
-
-    if (!isCountdownRunning) {
+    } else if (!isCountdownRunning) {
       timeLimit.querySelectorAll('button').forEach((button) => {
         button.style.backgroundColor = 'transparent';
         timeCountdown.style.textShadow = 'none';
       });
-
       if (event.target.classList.contains('promodoro')) {
         clearInterval(countdownInterval);
         promodoro();
