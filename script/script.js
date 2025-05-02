@@ -174,3 +174,8 @@ function pause() {
   removeGlow();
   isCountdownRunning = false;
 }
+
+//Copyrights
+const copyrights = document.querySelector('.footer-copyrights');
+const date = new Date();
+copyrights.innerHTML = `&copy; Stay Focused ${date.getFullYear()} All Rights Reserved.`;
